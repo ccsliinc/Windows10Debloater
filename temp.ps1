@@ -1,0 +1,3 @@
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | where-object {$_.Publisher -ne "Microsoft Corporation" -And $_.Publisher -ne "Microsoft" -And $_.DisplayName -ne $null} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Sort-Object -Property DisplayName | Format-Table -AutoSize
+
+Get-WmiObject -Class Win32_Product | Select-Object -Property Name

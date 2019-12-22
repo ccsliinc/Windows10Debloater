@@ -259,6 +259,21 @@ $RevertChange.Height = 36
 $RevertChange.Location = New-Object System.Drawing.Point(254, 32)
 $RevertChange.Font = 'Microsoft Sans Serif,10'
 
+$Label13 = New-Object System.Windows.Forms.Label
+$Label13.Text = "Program Uninstall"
+$Label13.AutoSize = $true
+$Label13.Width = 25
+$Label13.Height = 10
+$Label13.Location = New-Object System.Drawing.Point(512, 7)
+$Label13.Font = 'Microsoft Sans Serif,12,style=Bold,Underline'
+
+$CustomizeUninstallList = New-Object System.Windows.Forms.Button
+$CustomizeUninstallList.Text = "Create Uninstall List"
+$CustomizeUninstallList.Width = 140
+$CustomizeUninstallList.Height = 40
+$CustomizeUninstallList.Location = New-Object System.Drawing.Point(512, 32)
+$CustomizeUninstallList.Font = 'Microsoft Sans Serif,10'
+
 $Label2 = New-Object System.Windows.Forms.Label
 $Label2.Text = "Optional Changes/Fixes"
 $Label2.AutoSize = $true
@@ -353,7 +368,7 @@ $DisableDarkMode.Font = 'Microsoft Sans Serif,10'
 
 
 
-$Form.controls.AddRange(@($Debloat, $CustomizeBlacklists, $RemoveAllBloatware, $RemoveBlacklist, $Label1, $RevertChange, $Label2, $DisableCortana, $EnableCortana, $StopEdgePDFTakeover, $EnableEdgePDFTakeover, $DisableTelemetry, $RemoveRegkeys, $UnpinStartMenuTiles, $RemoveOnedrive, $FixWhitelist, $RemoveBloatNoBlacklist, $InstallNet35, $EnableDarkMode, $DisableDarkMode))
+$Form.controls.AddRange(@($Debloat, $CustomizeBlacklists, $RemoveAllBloatware, $RemoveBlacklist, $Label1, $RevertChange, $Label13, $CustomizeUninstallList, $Label2, $DisableCortana, $EnableCortana, $StopEdgePDFTakeover, $EnableEdgePDFTakeover, $DisableTelemetry, $RemoveRegkeys, $UnpinStartMenuTiles, $RemoveOnedrive, $FixWhitelist, $RemoveBloatNoBlacklist, $InstallNet35, $EnableDarkMode, $DisableDarkMode))
 
 $DebloatFolder = "C:\Temp\Windows10Debloater"
 If (Test-Path $DebloatFolder) {
@@ -369,6 +384,20 @@ Else {
 Start-Transcript -OutputDirectory "${DebloatFolder}"
 
 #region gui events {
+$CustomizeUninstallList.Add_Click( {
+    $CustomizeForm = New-Object System.Windows.Forms.Form
+    $CustomizeForm.ClientSize = '600,400'
+    $CustomizeForm.Text = "Customize Program Removal List"
+    $CustomizeForm.TopMost = $false
+    $CustomizeForm.AutoScroll = $true
+
+    $SaveList = New-Object System.Windows.Forms.Button
+    $SaveList.Text = "Save custom Program Removal List to custom-program-lists.ps1"
+    $SaveList.AutoSize = $true
+    $SaveList.Location = New-Object System.Drawing.Point(200, 5)
+    $CustomizeForm.controls.Add($SaveList)
+    })
+
 $CustomizeBlacklists.Add_Click( {
         $CustomizeForm = New-Object System.Windows.Forms.Form
         $CustomizeForm.ClientSize = '600,400'
